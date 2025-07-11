@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosso lugar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #4b0082, #ff3366);
+      color: white;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0;
+    }
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px #000;
+    }
+    .section {
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .section h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+    .timeline ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+    .timeline li {
+      margin: 10px 0;
+      position: relative;
+    }
+    .timeline li::before {
+      content: "\2665";
+      color: pink;
+      position: absolute;
+      left: -20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .love-letter {
+      text-align: center;
+      font-size: 1.2em;
+      font-style: italic;
+      line-height: 1.6;
+      padding: 20px;
+      border-left: 4px solid pink;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+    }
+    .heart {
+      position: fixed;
+      top: -10px;
+      width: 15px;
+      height: 15px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: fall 6s linear infinite;
+      z-index: 999;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -7.5px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: -7.5px;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nosso lugar 💜</h1>
+    <p>Feito com amor para minha morceguinha</p>
+  </header>  <section class="section timeline">
+    <h2>🗓️ Nossa história</h2>
+    <ul>
+      <li><strong>10/03/25:</strong> Voltamos a conversar</li>
+      <li><strong>20/03/25:</strong> Nosso primeiro beijo</li>
+      <li><strong>08/04/25:</strong> Início do namoro</li>
+      <li><strong>20/05/25:</strong> Esse dia foi especial em lembra 😏</li>
+      <li><strong>12/06/25:</strong> Nosso primeiro dia dos namorados (comemoramos da melhor forma possível lembra 😏)</li>
+      <li><strong>E todos os outros dias:</strong> Porque cada um deles, se for contigo, é o que importa 💖</li>
+    </ul>
+  </section>  <section class="section gallery">
+    <h2>📸 Nossas fotos</h2>
+    <div class="gallery">
+      <img src="foto1.jpg" alt="Foto 1" />
+      <img src="foto2.jpg" alt="Foto 2" />
+      <img src="foto3.jpg" alt="Foto 3" />
+      <!-- Substitua pelos nomes reais das fotos depois -->
+    </div>
+  </section>  <section class="section">
+    <h2>💌 Cartinha pra você</h2>
+    <div class="love-letter">
+      amor já te falei muitas vezes mas quero falar de novo e de novo quanto vezes for necessário eu te amoooo muito muito até o buraco negro pq ele n tem fim amo cada detalhe em ti tu é a pessoa q eu quero pra mim vida com quem eu quero casar sempre vou estar aqui contigo pra tudo bom ou ruim sempre vou estar com contigo já superamos bastante coisa e principalmente a gente n desistiu um do outro n desistiu de viver isso e agora estamos aqui quem diria ne te amo te amo te amo e meu amor tu é muito linda e que mulher gostosa que namorada incrível obrigada por tudo meu vida minha morceguinha ❤️
+    </div>
+  </section>  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    setInterval(createHeart, 400);
+  </script></body>
+</html>
