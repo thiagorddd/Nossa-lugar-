@@ -10,6 +10,21 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html, body {
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  perspective: 1px;
+  transform-style: preserve-3d;
+}
+
+.section {
+  position: relative;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  z-index: 1;
+}
     body {
       font-family: 'Nunito', sans-serif;
       background: linear-gradient(135deg, #4b0082, #ff3366);
@@ -154,5 +169,51 @@
       }, 6000);
     }
     setInterval(createHeart, 400);
-  </script></body>
+  </script> <!-- BOTÃO DE ELOGIOS -->
+<button onclick="mostrarElogios()" style="position: fixed; bottom: 30px; right: 30px; padding: 15px 20px; background: #ff69b4; color: white; border: none; border-radius: 30px; font-size: 1.2em; box-shadow: 0 0 10px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000;">
+  Toca aqui 💕
+</button>
+
+<script>
+  function mostrarElogios() {
+    const elogios = [
+      'Você é linda 💖',
+      'Você é forte 🌟',
+      'Você já passou por tanto e seguiu em frente 💪',
+      'Você é incrível ✨',
+      'Você me faz feliz de verdade ❤️',
+      'Você é sensível e carinhosa 🥺',
+      'Você é ciumenta e eu amo isso 😂',
+      'Você é brava e eu acho fofo 🐯',
+      'Você é tudo pra mim 💘',
+      'Você é minha princesa, minha morceguinha 🦇💕',
+      'Eu te amo além do que cabe em palavras 🫶'
+    ];
+
+    elogios.forEach((texto, i) => {
+      setTimeout(() => {
+        const msg = document.createElement('div');
+        msg.innerText = texto;
+        msg.style.position = 'fixed';
+        msg.style.left = Math.random() * 90 + 'vw';
+        msg.style.top = Math.random() * 80 + 'vh';
+        msg.style.background = '#fff';
+        msg.style.color = '#ff69b4';
+        msg.style.padding = '8px 15px';
+        msg.style.borderRadius = '20px';
+        msg.style.fontSize = '1em';
+        msg.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+        msg.style.zIndex = 9999;
+        msg.style.opacity = 1;
+        msg.style.transition = 'all 3s ease';
+        document.body.appendChild(msg);
+        setTimeout(() => {
+          msg.style.top = '0px';
+          msg.style.opacity = 0;
+        }, 100);
+        setTimeout(() => msg.remove(), 3000);
+      }, i * 400);
+    });
+  }
+</script></body>
 </html>
