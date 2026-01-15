@@ -1,223 +1,403 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nosso lugar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0b1d;
+      --bg-soft: rgba(255, 255, 255, 0.06);
+      --glass: rgba(255, 255, 255, 0.08);
+      --primary: #ff72d2;
+      --secondary: #7c6cff;
+      --accent: #53f2d3;
+      --text: #f8f8ff;
+      --muted: rgba(255, 255, 255, 0.72);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
-  height: 100%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  perspective: 1px;
-  transform-style: preserve-3d;
-}
 
-.section {
-  position: relative;
-  padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  transform-style: preserve-3d;
-  z-index: 1;
-}
     body {
-  font-family: 'Nunito', sans-serif;
-  background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
-  color: #f8f8f8;
-  padding: 20px;
-  scroll-behavior: smooth;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at top, #2b1b4b 0%, #140d2c 45%, #090913 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    .glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 114, 210, 0.2), transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(124, 108, 255, 0.18), transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(83, 242, 211, 0.16), transparent 50%);
+      z-index: 0;
+    }
+
     header {
+      position: relative;
+      padding: 80px 20px 60px;
       text-align: center;
-      padding: 40px 0;
+      z-index: 1;
     }
+
     header h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 3em;
-  color: #ff66cc;
-  text-shadow: 2px 2px #000;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      color: var(--primary);
+      text-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
+
+    header p {
+      max-width: 640px;
+      margin: 15px auto 0;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 0 20px 80px;
+      display: grid;
+      gap: 32px;
+    }
+
     .section {
-  max-width: 800px;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 30px;
+      border-radius: 28px;
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 24px 50px rgba(10, 10, 30, 0.35);
+      backdrop-filter: blur(18px);
     }
-      
+
     .section h2 {
       font-family: 'Dancing Script', cursive;
-      font-size: 2em;
-      margin-bottom: 15px;
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      margin-bottom: 20px;
+      color: var(--text);
     }
-    .timeline ul {
-      list-style: none;
-      padding-left: 20px;
+
+    .hero-card {
+      display: grid;
+      gap: 20px;
+      align-items: center;
     }
-    .timeline li {
-      margin: 10px 0;
-      position: relative;
+
+    .hero-card strong {
+      color: var(--accent);
+      font-weight: 700;
     }
-    .timeline li::before {
-      content: "\2665";
-      color: pink;
-      position: absolute;
-      left: -20px;
-    }
-    .gallery {
+
+    .badge-row {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+      gap: 12px;
+      margin-top: 10px;
     }
+
+    .badge {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid;
+      gap: 6px;
+    }
+
+    .timeline-item span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
     .gallery img {
       width: 100%;
-      max-width: 250px;
-      border-radius: 15px;
-      transition: transform 0.3s;
+      border-radius: 18px;
+      object-fit: cover;
+      aspect-ratio: 4 / 5;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
+
     .gallery img:hover {
-      transform: scale(1.05);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
     }
+
     .love-letter {
-      text-align: center;
-      font-size: 1.2em;
-      font-style: italic;
-      line-height: 1.6;
-      padding: 20px;
-      border-left: 4px solid pink;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--muted);
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .heart {
+
+    .signature {
+      margin-top: 16px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    .floating-hearts {
       position: fixed;
-      top: -10px;
-      width: 15px;
-      height: 15px;
-      background: pink;
-      transform: rotate(45deg);
-      animation: fall 6s linear infinite;
-      z-index: 999;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
     }
+
+    .heart {
+      position: absolute;
+      top: -10px;
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
+      transform: rotate(45deg);
+      animation: fall linear infinite;
+      opacity: 0.9;
+    }
+
     .heart::before,
     .heart::after {
       content: '';
       position: absolute;
-      width: 15px;
-      height: 15px;
-      background: pink;
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
       border-radius: 50%;
     }
+
     .heart::before {
-      top: -7.5px;
+      top: -7px;
       left: 0;
     }
+
     .heart::after {
       top: 0;
-      left: -7.5px;
+      left: -7px;
     }
+
     @keyframes fall {
       to {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(110vh) rotate(360deg);
         opacity: 0;
+      }
+    }
+
+    .compliment-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .compliment-button:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .compliment {
+      position: fixed;
+      background: #fff;
+      color: #ff5bbd;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding-top: 60px;
+      }
+
+      .section {
+        padding: 24px;
+      }
+
+      .compliment-button {
+        bottom: 20px;
+        right: 20px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="glow"></div>
+  <div class="floating-hearts" id="floating-hearts"></div>
+
   <header>
     <h1>Nosso lugar 💜</h1>
-    <p>Feito com amor para minha morceguinha</p>
-  </header>  <section class="section timeline">
-    <h2>🗓️ Nossa história</h2>
-    <ul>
-      <li><strong>10/03/25:</strong> Voltamos a conversar</li>
-      <li><strong>20/03/25:</strong> Nosso primeiro beijo</li>
-      <li><strong>08/04/25:</strong> Início do namoro</li>
-      <li><strong>20/05/25:</strong> Esse dia foi especial em lembra 😏</li>
-      <li><strong>12/06/25:</strong> Nosso primeiro dia dos namorados (comemoramos da melhor forma possível lembra 😏)</li>
-      <li><strong>E todos os outros dias:</strong> Porque cada um deles, se for contigo, é especial 💖</li>
-    </ul>
-  </section>  <section class="section gallery">
-    <h2>📸 Nossas fotos</h2>
-    <div class="gallery">
-      <img src="essas_foto.jpg" alt="Foto 1" />
-      <img src="foto_essas.png" alt="Foto 2" />
-      <img src="sim_foto.jpg" alt="Foto 3" />
-      <!-- Substitua pelos nomes reais das fotos depois -->
-    </div>
-  </section>  <section class="section">
-    <h2>💌 Cartinha pra você</h2>
-    <div class="love-letter">
-      amor já te falei muitas vezes mas quero falar de novo e de novo quanto vezes for necessário eu te amoooo muito muito até o buraco negro pq ele n tem fim, amo cada detalhe em ti, tu é a pessoa q eu quero pra minha vida com quem eu quero casar, sempre vou estar aqui contigo pra tudo bom ou ruim sempre vou estar com contigo já superamos bastante coisa e principalmente a gente n desistiu um do outro n desistiu de viver isso e agora estamos aqui, quem diria né.
-      Te amo, te amo, te amo e meu amor você é muito linda e que mulher gostosa, que namorada incrível obrigada por tudo minha vida, minha morceguinha te amo muito ❤️
-    </div>
-  </section>  <script>
+    <p>
+      Um cantinho feito com carinho para lembrar o quanto cada momento ao teu lado é mágico. Você é
+      meu destino favorito, minha paz e minha melhor escolha.
+    </p>
+  </header>
+
+  <main class="container">
+    <section class="section hero-card">
+      <h2>✨ Nossa energia</h2>
+      <p>
+        Meu amor, tudo ganha brilho quando você está por perto. Seu sorriso acalma, sua voz inspira,
+        e o seu abraço é o meu lar. <strong>Obrigada por existir e por me escolher todos os dias.</strong>
+      </p>
+      <div class="badge-row">
+        <span class="badge">Nossa conexão</span>
+        <span class="badge">Cuidado diário</span>
+        <span class="badge">Planos infinitos</span>
+        <span class="badge">Paixão que cresce</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🗓️ Linha do tempo da nossa história</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span>10/03/25</span>
+          <p>Quando voltamos a conversar e o coração sorriu de novo.</p>
+        </div>
+        <div class="timeline-item">
+          <span>20/03/25</span>
+          <p>Nosso primeiro beijo, cheio de borboletas.</p>
+        </div>
+        <div class="timeline-item">
+          <span>08/04/25</span>
+          <p>O começo oficial do nosso namoro e de um sonho lindo.</p>
+        </div>
+        <div class="timeline-item">
+          <span>20/05/25</span>
+          <p>Um dia inesquecível que ficou guardado na memória.</p>
+        </div>
+        <div class="timeline-item">
+          <span>12/06/25</span>
+          <p>Nosso primeiro dia dos namorados, do jeitinho mais perfeito possível.</p>
+        </div>
+        <div class="timeline-item">
+          <span>E todos os dias</span>
+          <p>Porque cada momento contigo vira lembrança especial.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>📸 Nossas fotos favoritas</h2>
+      <div class="gallery">
+        <img src="essas_foto.jpg" alt="Nós dois sorrindo" />
+        <img src="foto_essas.png" alt="Nosso momento especial" />
+        <img src="sim_foto.jpg" alt="Nosso clique favorito" />
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>💌 Cartinha pra você</h2>
+      <div class="love-letter">
+        Amor, eu já te disse mil vezes, mas vou repetir mais mil: eu te amo até onde o universo não
+        alcança. Amo cada detalhe teu, cada jeito, cada brilho no olhar. Você é a pessoa com quem eu
+        quero dividir a vida, os planos, os sonhos. Obrigada por ser minha parceira, minha força e
+        minha paz. Seguimos firmes, com carinho e coragem, e nada pode parar o que construímos juntas.
+        <div class="signature">Com todo o meu amor, sempre 💖</div>
+      </div>
+    </section>
+  </main>
+
+  <button class="compliment-button" onclick="mostrarElogios()">Toca aqui 💕</button>
+
+  <script>
+    const heartContainer = document.getElementById('floating-hearts');
+
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
     }
-    setInterval(createHeart, 400);
-  </script> <!-- BOTÃO DE ELOGIOS -->
-<button onclick="mostrarElogios()" style="position: fixed; bottom: 30px; right: 30px; padding: 15px 20px;background: #c94bdb; ; color: white; border: none; border-radius: 30px; font-size: 1.2em; box-shadow: 0 0 10px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000;">
-  Toca aqui 💕
-</button>
 
-<script>
-  function mostrarElogios() {
-    const elogios = [
-      'Você é linda 💖',
-      'Você é forte 🌟',
-      'Você já passou por tanto e seguiu em frente 💪',
-      'Você é incrível ✨',
-      'Você me faz feliz de verdade ❤️',
-      'Você é sensível e carinhosa 🥺',
-      'Você é ciumenta e eu amo isso 😂',
-      'Você é brava e eu acho fofo 🐯',
-      'Você é tudo pra mim 💘',
-      'Você é minha princesa, minha morceguinha 🦇💕',
-      'Eu te amo além do que cabe em palavras 🫶'
-    ];
+    setInterval(createHeart, 500);
 
-    elogios.forEach((texto, i) => {
-      setTimeout(() => {
-        const msg = document.createElement('div');
-        msg.innerText = texto;
-        msg.style.position = 'fixed';
-        msg.style.left = Math.random() * 90 + 'vw';
-        msg.style.top = Math.random() * 80 + 'vh';
-        msg.style.background = '#fff';
-        msg.style.color = '#ff69b4';
-        msg.style.padding = '8px 15px';
-        msg.style.borderRadius = '20px';
-        msg.style.fontSize = '1em';
-        msg.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
-        msg.style.zIndex = 9999;
-        msg.style.opacity = 1;
-        msg.style.transition = 'all 3s ease';
-        document.body.appendChild(msg);
+    function mostrarElogios() {
+      const elogios = [
+        'Você é linda 💖',
+        'Você é forte 🌟',
+        'Sua presença é meu refúgio 🌙',
+        'Você me inspira a ser melhor ✨',
+        'Seu abraço é meu lugar favorito ❤️',
+        'Você é carinhosa e sensível 🥺',
+        'Seu sorriso ilumina tudo ☀️',
+        'Você é minha paz e minha bagunça boa 💘',
+        'Você é minha princesa, minha morceguinha 🦇💕',
+        'Eu te amo além do que cabe em palavras 🫶'
+      ];
+
+      elogios.forEach((texto, i) => {
         setTimeout(() => {
-          msg.style.top = '0px';
-          msg.style.opacity = 0;
-        }, 100);
-        setTimeout(() => msg.remove(), 3000);
-      }, i * 400);
-    });
-  }
-</script></body>
+          const msg = document.createElement('div');
+          msg.classList.add('compliment');
+          msg.innerText = texto;
+          msg.style.left = Math.random() * 80 + 10 + 'vw';
+          msg.style.top = Math.random() * 70 + 15 + 'vh';
+          document.body.appendChild(msg);
+          requestAnimationFrame(() => {
+            msg.style.opacity = 1;
+            msg.style.transform = 'translateY(-12px)';
+          });
+          setTimeout(() => msg.remove(), 2800);
+        }, i * 320);
+      });
+    }
+  </script>
+</body>
 </html>
